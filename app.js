@@ -1118,7 +1118,7 @@ function safeApplyRange(){
     	return `
         <div class="grid">
 						<div style="margin-top:8px">
-                  <button class="btn" onclick="history.back()">Atgal</button>
+                  <button class="btn" onclick="history.back()">🔙</button>
                 </div>
           <div class="card">
             <div class="car">
@@ -1173,7 +1173,7 @@ function safeApplyRange(){
 
           ${u.role === 'ukvedys' ? `
           <div class="card">
-            <h3>Naujas defektas (ūkvedys)</h3>
+            <h3>Naujas defektas</h3>
             <div class="row">
               <div>
                 <label>Aprašas</label>
