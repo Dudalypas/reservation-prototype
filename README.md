@@ -1,6 +1,7 @@
 # Transporto prieziuros ir rezervaciju prototipas
 
 Vieno puslapio mock aplikacija, kuria galima atidaryti tiesiog per `index.html` be jokio backend ar bundleriu.
+- demo - https://dudalypas.github.io/reservation-prototype/
 
 ## Prisijungimo duomenys
 - Darbuotojas: `user@demo.lt` / `demo`
