@@ -14,7 +14,7 @@
     			role: 'ukvedys',
     			email: 'ukvedys@demo.lt',
     			password: 'demo',
-    			name: 'Aistė'
+    			name: 'Gytautas'
     		},
     	],
     	cars: [{
@@ -460,32 +460,35 @@
     		.filter(r => r.userId === u.id)
     		.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    	return `
-        <div class="card">
-          <h2>Mano rezervacijos</h2>
-          <table class="table mini">
-            <thead>
-              <tr><th>Auto</th><th>Nuo</th><th>Iki</th><th>Būsena</th><th></th></tr>
-            </thead>
-            <tbody>
-${
-  mine.length
-    ? mine.map(r => {
-        const car = db.cars.find(c => c.id === r.carId);
-        return `<tr>
-          <td>${car?.title||'?' } <span class="muted">(${car?.plate||'?'})</span></td>
-          <td>${fmt(r.from)}</td>
-          <td>${fmt(r.to)}</td>
-          <td>${r.status}</td>
-          <td><button class="btn danger mini" onclick="cancelRes('${r.id}')">Atšaukti</button></td>
-        </tr>`;
-      }).join('')
-    : '<tr><td colspan="5" class="muted">Rezervacijų nėra.</td></tr>'
-}
-            </tbody>
-          </table>
-        </div>
-
+  return `
+    <div class="card">
+      <h2>Mano rezervacijos</h2>
+      <table class="table mini">
+        <thead>
+          <tr>
+            <th>Auto</th>
+            <th>Nuo</th>
+            <th>Iki</th>
+            <th>Būsena</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>${
+          mine.length
+            ? mine.map(r => {
+                const car = db.cars.find(c => c.id === r.carId);
+                return `<tr>
+                  <td>${car?.title || '?'} <span class="muted">(${car?.plate || '?'})</span></td>
+                  <td>${fmt(r.from)}</td>
+                  <td>${fmt(r.to)}</td>
+                  <td>${r.status}</td>
+                  <td><button class="btn danger mini" onclick="cancelRes('${r.id}')">Atšaukti</button></td>
+                </tr>`;
+              }).join('')
+            : '<tr><td colspan="5" class="muted">Rezervacijų nėra.</td></tr>'
+        }</tbody>
+      </table>
+    </div>
             <div class="card" style="margin-top:12px">
         <h3>Pranešti apie problemą</h3>
         <p class="muted mini">
@@ -1020,29 +1023,24 @@ ${
               </div>
             </div>
           </div>
-
-          <div class="card">
-            <h3>Rezervacijų istorija</h3>
-            <table class="table mini">
-              <thead><tr><th>Nuo</th><th>Iki</th><th>Vartotojas</th></tr></thead>
-              <tbody>
-                ${
-                  resv.length
-                  ? resv.map(r=>{
-                      const usr = db.users.find(u=>u.id===r.userId);
-                      return `<tr>
-                        <td>${fmt(r.from)}</td>
-                        <td>${fmt(r.to)}</td>
-                        <td>${usr?.name||usr?.email||'?'}</td>
-                      </tr>`;
-                    }).join('')
-                  : ` < tr > < td colspan = "3"
-    	class = "muted" > Nėra < /td></tr > `
-                }
-              </tbody>
-            </table>
-          </div>
-
+		<div class="card">
+		<h3>Rezervacijų istorija</h3>
+		<table class="table mini">
+			<thead><tr><th>Nuo</th><th>Iki</th><th>Vartotojas</th></tr></thead>
+			<tbody>${
+			resv.length
+				? resv.map(r => {
+					const usr = db.users.find(u => u.id === r.userId);
+					return `<tr>
+					<td>${fmt(r.from)}</td>
+					<td>${fmt(r.to)}</td>
+					<td>${usr?.name || usr?.email || '?'}</td>
+					</tr>`;
+				}).join('')
+				: '<tr><td colspan="3" class="muted">Nėra</td></tr>'
+			}</tbody>
+		</table>
+		</div>
           <div class="card">
             <h3>Defektai ir techninės priežiūros darbai</h3>
             <table class="table mini">
